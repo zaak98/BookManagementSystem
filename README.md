@@ -1,2 +1,0 @@
-# BookManagementSystem
-oop at gnu
