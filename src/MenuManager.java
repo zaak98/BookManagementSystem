@@ -27,7 +27,7 @@ public class MenuManager {
 				bookmanager.editBook();
 			}
 			if (num == 4) {
-				bookmanager.viewBook();
+				bookmanager.viewBooks();
 			}
 			else {
 				continue;
