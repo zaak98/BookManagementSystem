@@ -9,30 +9,35 @@ public class MenuManager {
 		
 		int num = -1;
 		while (num != 5) {
-			System.out.println ("***Book Management System Menu***");
-			System.out.println ("1. Add Book");
-			System.out.println ("2. Delete Book");
-			System.out.println ("3. Edit Book");
-			System.out.println ("4. View Book");
-			System.out.println ("5. Exit");
-			System.out.println ("Select one number between 1 - 5 :");
+			showMenu();
 			num = input.nextInt();
-			if (num == 1) {
+			switch (num) {
+			case 1 : 
 				bookmanager.addBook();
-			}
-			if (num == 2) {
+				break;
+			case 2 :
 				bookmanager.deleteBook();
-			}
-			if (num == 3) {
+				break;
+			case 3 : 
 				bookmanager.editBook();
-			}
-			if (num == 4) {
+				break;
+			case 4 : 
 				bookmanager.viewBooks();
-			}
-			else {
+				break;
+			default :
 				continue;
 			}
 		}
+	}
+	
+	public static void showMenu() {
+		System.out.println ("***Book Management System Menu***");
+		System.out.println ("1. Add Book");
+		System.out.println ("2. Delete Book");
+		System.out.println ("3. Edit Book");
+		System.out.println ("4. View Book");
+		System.out.println ("5. Exit");
+		System.out.println ("Select one number between 1 - 5 :");
 	}
 	
 }

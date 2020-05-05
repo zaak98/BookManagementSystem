@@ -1,7 +1,7 @@
 package book;
 import java.util.Scanner;
 
-public class Book {
+public abstract class Book implements BookInput {
 	
 	protected BookKind kind = BookKind.Nonfiction;
 	protected int number;
@@ -31,6 +31,10 @@ public class Book {
 		this.name = name;
 		this.auther = auther;
 		this.publisher = publisher;
+	}
+	
+	public Book(BookKind kind) {
+		this.kind = kind;
 	}
 	
 	public BookKind getKind() {
@@ -72,9 +76,32 @@ public class Book {
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-
-
-	public void printInfo() {
+	
+	public void setBookNumber(Scanner input) {
+		System.out.print("Book number : ");
+		int number = input.nextInt();
+		this.setNumber(number);
+	}
+	
+	public void setBookName(Scanner input) {
+		System.out.print("Book name : ");
+		String name = input.next();
+		this.setName(name);
+	}
+	
+	public void setBookAuther(Scanner input) {
+		System.out.print("Book auther : ");
+		String auther = input.next();
+		this.setAuther(auther);
+	}
+	
+	public void setBookPublisher(Scanner input) {
+		System.out.print("Book publisher : ");
+		String publisher = input.next();
+		this.setPublisher(publisher);
+	}
+	
+	public String getKindString() {
 		String skind = "none";
 		switch(this.kind) {
 		case Nonfiction:
@@ -88,25 +115,10 @@ public class Book {
 			break;
 		default:
 		}
-		System.out.println("kind = " + skind + " number = " + number + " name = " + name + " auther = " + auther + " publisher = " + publisher);
+		return skind;
 	}
-	
-	public void getUserInput(Scanner input) {
-		System.out.print("Book number : ");
-		int number = input.nextInt();
-		this.setNumber(number);
-		
-		System.out.print("Book name : ");
-		String name = input.next();
-		this.setName(name);
-		
-		System.out.print("Book author : ");
-		String auther = input.next();
-		this.setAuther(auther);
-		
-		System.out.print("Book publisher : ");
-		String publisher = input.next();
-		this.setPublisher(publisher);
-	}
+
+
+	public abstract void printInfo();
 
 }

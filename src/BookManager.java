@@ -2,12 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import book.Book;
+import book.BookInput;
+import book.BookKind;
 import book.MagazineBook;
 import book.MajorBook;
+import book.NonfictionBook;
 
 public class BookManager {
 	
-	ArrayList<Book> books = new ArrayList<Book>();
+	ArrayList<BookInput> books = new ArrayList<BookInput>();
 	
 	Scanner input;
 	
@@ -17,7 +20,7 @@ public class BookManager {
 	
 	public void addBook() {
 		int kind = 0;
-		Book book;
+		BookInput bookInput;
 		while (kind != 1 && kind != 2) {
 			System.out.println("1 for Nonfiction ");
 			System.out.println("2 for Magazine ");
@@ -25,21 +28,21 @@ public class BookManager {
 			System.out.println("Select num 1 or 2 or 3 for Book Kind: ");
 			kind = input.nextInt();
 			if(kind == 1) {
-				book = new Book();
-				book.getUserInput(input);
-				books.add(book);
+				bookInput = new NonfictionBook(BookKind.Nonfiction);
+				bookInput.getUserInput(input);
+				books.add(bookInput);
 				break;
 			}
 			else if(kind == 2) {
-				book = new MagazineBook();
-				book.getUserInput(input);
-				books.add(book);
+				bookInput = new MagazineBook(BookKind.Magazine);
+				bookInput.getUserInput(input);
+				books.add(bookInput);
 				break;
 			}
 			else if(kind == 3) {
-				book = new MajorBook();
-				book.getUserInput(input);
-				books.add(book);
+				bookInput = new MajorBook(BookKind.Major);
+				bookInput.getUserInput(input);
+				books.add(bookInput);
 				break;
 			}
 			else {
@@ -51,6 +54,11 @@ public class BookManager {
 	public void deleteBook() {
 		System.out.print("Book number : ");
 		int bookNumber = input.nextInt();
+		int index = findIndex(bookNumber);
+		removefromBooks(index, bookNumber);
+	}
+	
+	public int findIndex(int bookNumber) {
 		int index = -1;
 		for (int i=0; i<books.size();i++) {
 			if (books.get(i).getNumber() == bookNumber) {
@@ -58,13 +66,18 @@ public class BookManager {
 				break;
 			}
 		}
+	return index;
+	}
+	
+	public int removefromBooks(int index, int bookNumber) {
 		if (index >= 0) {
 			books.remove(index);
 			System.out.println("the book"  + bookNumber + "is deleted");
+			return 1;
 		}
 		else {
 			System.out.println("the book has not been registered");
-			return;
+			return -1;
 		}
 	}
 	
@@ -73,39 +86,26 @@ public class BookManager {
 		System.out.print("Book number : ");
 		int bookNumber = input.nextInt();
 		for (int i=0; i<books.size();i++) {
-			Book book = books.get(i);
+			BookInput book = books.get(i);
 			if (book.getNumber() == bookNumber) {
 				int num = -1;
 				while (num != 5) {
-					System.out.println ("**Book Info Edit Menu**");
-					System.out.println ("1. Edit Number");
-					System.out.println ("2. Edit Name");
-					System.out.println ("3. Edit Auther");
-					System.out.println ("4. Edit Publisher");
-					System.out.println ("5. Exit");
-					System.out.println ("Select one number between 1 - 5 :");
+					showEditMenu();
 					num = input.nextInt();
-					if (num == 1) {
-						System.out.print("Book number : ");
-						int number = input.nextInt();
-						book.setNumber(number);
-					}
-					if (num == 2) {
-						System.out.print("Book name : ");
-						String name = input.next();
-						book.setName(name);
-					}
-					if (num == 3) {
-						System.out.print("Book auther : ");
-						String auther = input.next();
-						book.setAuther(auther);
-					}
-					if (num == 4) {
-						System.out.print("Book publisher : ");
-						String publisher = input.next();
-						book.setPublisher(publisher);
-					}
-					else {
+					switch(num) {
+					case 1 :
+						book.setBookNumber(input);
+						break;
+					case 2 :
+						book.setBookName(input);
+						break;
+					case 3 : 
+						book.setBookAuther(input);
+						break;
+					case 4 :
+						book.setBookPublisher(input);
+						break;
+					default : 
 						continue;
 					}
 				}	
@@ -119,6 +119,17 @@ public class BookManager {
 		for (int i=0; i<books.size();i++) {
 			books.get(i).printInfo();
 		}
+	}
+	
+	
+	public void showEditMenu() {
+		System.out.println ("**Book Info Edit Menu**");
+		System.out.println ("1. Edit Number");
+		System.out.println ("2. Edit Name");
+		System.out.println ("3. Edit Auther");
+		System.out.println ("4. Edit Publisher");
+		System.out.println ("5. Exit");
+		System.out.println ("Select one number between 1 - 5 :");
 	}
 
 }
