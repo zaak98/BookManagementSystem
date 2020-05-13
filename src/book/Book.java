@@ -1,5 +1,6 @@
 package book;
 import java.util.Scanner;
+import exception.AutherFormatException;
 
 public abstract class Book implements BookInput {
 	
@@ -65,7 +66,10 @@ public abstract class Book implements BookInput {
 		return auther;
 	}
 
-	public void setAuther(String auther) {
+	public void setAuther(String auther) throws AutherFormatException {
+		if(!auther.contains("@") && !auther.equals("")) {
+			throw new AutherFormatException();
+		}
 		this.auther = auther;
 	}
 
@@ -90,9 +94,17 @@ public abstract class Book implements BookInput {
 	}
 	
 	public void setBookAuther(Scanner input) {
-		System.out.print("Book auther : ");
-		String auther = input.next();
-		this.setAuther(auther);
+		String auther = "";
+		while(!auther.contains("@")) {
+			System.out.print("Book auther : ");
+			auther = input.next();
+			try {
+				this.setAuther(auther);
+			} catch(AutherFormatException e) {
+				System.out.println("Incorrect Auther Format. Put the Auther without mark character");
+			}
+		}
+		
 	}
 	
 	public void setBookPublisher(Scanner input) {

@@ -20,7 +20,5 @@ public class MagazineBook extends SubBook {
 		String skind = getKindString();
 		System.out.println("kind = " + skind + " number = " + number + " name = " + name + " auther = " + auther + " publisher = " + publisher);
 	}
-
-
 }
 

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import book.Book;
@@ -21,33 +22,43 @@ public class BookManager {
 	public void addBook() {
 		int kind = 0;
 		BookInput bookInput;
-		while (kind != 1 && kind != 2) {
-			System.out.println("1 for Nonfiction ");
-			System.out.println("2 for Magazine ");
-			System.out.println("3 for Major ");
-			System.out.println("Select num 1 or 2 or 3 for Book Kind: ");
-			kind = input.nextInt();
-			if(kind == 1) {
-				bookInput = new NonfictionBook(BookKind.Nonfiction);
-				bookInput.getUserInput(input);
-				books.add(bookInput);
-				break;
+		while (kind < 1 || kind > 2) {
+			try {
+				System.out.println("go into add books in while");
+				System.out.println("1 for Nonfiction ");
+				System.out.println("2 for Magazine ");
+				System.out.println("3 for Major ");
+				System.out.println("Select num 1 or 2 or 3 for Book Kind: ");
+				kind = input.nextInt();
+				if(kind == 1) {
+					bookInput = new NonfictionBook(BookKind.Nonfiction);
+					bookInput.getUserInput(input);
+					books.add(bookInput);
+					break;
+				}
+				else if(kind == 2) {
+					bookInput = new MagazineBook(BookKind.Magazine);
+					bookInput.getUserInput(input);
+					books.add(bookInput);
+					break;
+				}
+				else if(kind == 3) {
+					bookInput = new MajorBook(BookKind.Major);
+					bookInput.getUserInput(input);
+					books.add(bookInput);
+					break;
+				}
+				else {
+					System.out.print("Select num for Book Kind between 1, 2 and 3: ");
+				}	
 			}
-			else if(kind == 2) {
-				bookInput = new MagazineBook(BookKind.Magazine);
-				bookInput.getUserInput(input);
-				books.add(bookInput);
-				break;
+			catch(InputMismatchException e) {
+				System.out.println("Please put an integer between 1 and 3!");
+				if(input.hasNext()) {
+					input.next();
+				}
+				kind = -1;
 			}
-			else if(kind == 3) {
-				bookInput = new MajorBook(BookKind.Major);
-				bookInput.getUserInput(input);
-				books.add(bookInput);
-				break;
-			}
-			else {
-				System.out.print("Select num for Book Kind between 1, 2 and 3: ");
-			}		
 		}		
 	}
 	
