@@ -1,3 +1,10 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -9,12 +16,15 @@ import book.MagazineBook;
 import book.MajorBook;
 import book.NonfictionBook;
 
-public class BookManager {
+public class BookManager implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8867333931238636841L;
 	
 	ArrayList<BookInput> books = new ArrayList<BookInput>();
-	
-	Scanner input;
-	
+	transient Scanner input;
 	BookManager (Scanner input) {
 		this.input = input;
 	}
@@ -142,5 +152,6 @@ public class BookManager {
 		System.out.println ("5. Exit");
 		System.out.println ("Select one number between 1 - 5 :");
 	}
+	
 
 }

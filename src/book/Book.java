@@ -1,8 +1,9 @@
 package book;
 import java.util.Scanner;
 import exception.AutherFormatException;
+import java.io.Serializable;
 
-public abstract class Book implements BookInput {
+public abstract class Book implements BookInput, Serializable {
 	
 	protected BookKind kind = BookKind.Nonfiction;
 	protected int number;
