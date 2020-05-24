@@ -16,8 +16,11 @@ public class MenuManager {
 		Scanner input = new Scanner(System.in);
 		BookManager bookmanager = getObject("bookmanager.ser");
 		if (bookmanager == null) {
-			bookmanager = new BookManager(input);
+			bookmanager = new BookManager();
 		}
+		else {
+            bookmanager.setScanner(input);
+        }
 		
 		selectMenu(input, bookmanager);
 		putObject(bookmanager, "bookmanager.ser");
