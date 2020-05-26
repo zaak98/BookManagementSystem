@@ -5,6 +5,10 @@ import java.io.Serializable;
 
 public abstract class Book implements BookInput, Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1658816754178978135L;
 	protected BookKind kind = BookKind.Nonfiction;
 	protected int number;
 	protected String name;

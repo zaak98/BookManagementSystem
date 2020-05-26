@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import book.Book;
 import book.BookInput;
 import book.BookKind;
 import book.MagazineBook;
@@ -19,7 +18,12 @@ public class BookManager implements Serializable {
 	
 	ArrayList<BookInput> books = new ArrayList<BookInput>();
 	transient Scanner input;
+
 	public void setScanner(Scanner input) {
+        this.input = input;
+    }
+	
+	BookManager (Scanner input) {
 		this.input = input;
 	}
 	

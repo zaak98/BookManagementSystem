@@ -16,7 +16,7 @@ public class MenuManager {
 		Scanner input = new Scanner(System.in);
 		BookManager bookmanager = getObject("bookmanager.ser");
 		if (bookmanager == null) {
-			bookmanager = new BookManager();
+			bookmanager = new BookManager(input);
 		}
 		else {
             bookmanager.setScanner(input);
