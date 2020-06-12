@@ -18,6 +18,12 @@ public interface BookInput {
 	
 	public int getNumber();
 	
+	public String getName();
+	
+	public String getAuther();
+	
+	public String getPublisher();
+	
 	public void printInfo();
 	
 	public void setBookNumber(Scanner input);
